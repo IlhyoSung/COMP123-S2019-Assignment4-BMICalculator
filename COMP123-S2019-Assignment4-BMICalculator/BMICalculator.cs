@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace COMP123_S2019_Assignment4_BMICalculator
 {
-    public partial class MainForm : Form
+    public partial class BMICalculator : Form
     {
-        public MainForm()
+        public BMICalculator()
         {
             InitializeComponent();
         }

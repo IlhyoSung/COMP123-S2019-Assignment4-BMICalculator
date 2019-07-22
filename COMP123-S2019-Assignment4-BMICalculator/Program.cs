@@ -11,6 +11,7 @@ using System.Windows.Forms;
 // Revision history
 // 21/07/2019 Create UI
 // 22/07/2019 Add funtionalities
+//            Add documentation
 
 namespace COMP123_S2019_Assignment4_BMICalculator
 {
@@ -24,6 +25,7 @@ namespace COMP123_S2019_Assignment4_BMICalculator
         [STAThread]
         static void Main()
         {
+            // This is for removing style of progress bar
             //Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             welcomeForm = new WelcomeForm();

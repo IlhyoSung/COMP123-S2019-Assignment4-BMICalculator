@@ -15,6 +15,7 @@ using System.Windows.Forms;
 // Revision history
 // 21/07/2019 Create UI
 // 22/07/2019 Add funtionalities
+//            Add documentation
 
 namespace COMP123_S2019_Assignment4_BMICalculator
 {
@@ -23,13 +24,20 @@ namespace COMP123_S2019_Assignment4_BMICalculator
         public string outputString { get; set; }
         public bool decimalExists { get; set; }
         public float outputValue { get; set; }
-        public TextBox ActiveTextBox { get; set; }
-        
+        public TextBox ActiveTextBox { get; set; }        
+
         public float BMI;
+
         public BMICalculator()
         {
             InitializeComponent();
-        }        
+        }
+
+        /// <summary>
+        /// This is for changing to Imperial unit
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ImperialButton_CheckedChanged(object sender, EventArgs e)
         {            
             HeightUnitLabel.Text = "in";         
@@ -38,6 +46,11 @@ namespace COMP123_S2019_Assignment4_BMICalculator
             WeightTextBox.Text = "0";
         }
 
+        /// <summary>
+        /// This is for changing to Metric unit
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void MetricButton_CheckedChanged(object sender, EventArgs e)
         {            
             HeightUnitLabel.Text = "cm";            
@@ -46,6 +59,11 @@ namespace COMP123_S2019_Assignment4_BMICalculator
             WeightTextBox.Text = "0";
         }
 
+        /// <summary>
+        /// This is for activating input text box (for both weight and height)
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ActiveTextBox_Click(object sender, EventArgs e)
         {
             if (ActiveTextBox != null)
@@ -63,6 +81,11 @@ namespace COMP123_S2019_Assignment4_BMICalculator
             ResultPanel.Visible = false;
         }
 
+        /// <summary>
+        /// this is for clicking calculator button (including number, clear, back, done, and decimal)
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void CalculatorButton_Click(object sender, EventArgs e)
         {
             var TheButton = sender as Button;
@@ -71,7 +94,7 @@ namespace COMP123_S2019_Assignment4_BMICalculator
             int buttonValue;
             bool resultCondition = int.TryParse(tag, out buttonValue);
 
-            // If the use pressed a number button
+            // If the user pressed a number button
             if (resultCondition)
             {
                 int maxSize = 3;
@@ -106,6 +129,10 @@ namespace COMP123_S2019_Assignment4_BMICalculator
                 }
             }
         }
+
+        /// <summary>
+        /// If the user click decimal button
+        /// </summary>
         private void Add_DecimalToResultLabel()
         {
             if (!decimalExists)
@@ -114,6 +141,9 @@ namespace COMP123_S2019_Assignment4_BMICalculator
                 decimalExists = true;
             }
         }
+        /// <summary>
+        /// If the user click done button
+        /// </summary>
         private void Finalize_Output()
         {
             if (outputString == string.Empty)
@@ -129,6 +159,10 @@ namespace COMP123_S2019_Assignment4_BMICalculator
             }            
             Clear_NumericKeyboard();            
         }
+
+        /// <summary>
+        /// If the user click back button
+        /// </summary>
         private void Remove_LastCharacterFromResultLabel()
         {
             if (outputString.Length > 0)
@@ -148,6 +182,10 @@ namespace COMP123_S2019_Assignment4_BMICalculator
                 NumberResultLabel.Text = outputString;
             }
         }
+
+        /// <summary>
+        /// If the user click clear button
+        /// </summary>
         private void Clear_NumericKeyboard()
         {
             NumberResultLabel.Text = "0";
@@ -155,6 +193,10 @@ namespace COMP123_S2019_Assignment4_BMICalculator
             decimalExists = false;
             outputValue = 0.0f;
         }
+
+        /// <summary>
+        /// This is a method for calculating BMI value and inputting value to result.
+        /// </summary>
         private void Calculate()
         {
             float weight = float.Parse(WeightTextBox.Text);
@@ -179,6 +221,11 @@ namespace COMP123_S2019_Assignment4_BMICalculator
             BMI = (weight * imperialConst) / (height * height);
             BMITextBox.Text = Math.Round(BMI, 1).ToString();
         }
+
+        /// <summary>
+        /// This is method to show different result and change color of progress bar 
+        /// depending on BMI scale
+        /// </summary>
         private void Show_ResultTextBox()
         {
             if (BMI < 18.5)
@@ -201,6 +248,11 @@ namespace COMP123_S2019_Assignment4_BMICalculator
             }
             BMIProgressBar.Value = (int)BMI;
         }
+
+        /// <summary>
+        /// This method to show normal weight range 
+        /// depending on user's height and type of unit(Imperial or Metric)
+        /// </summary>
         private void Show_NormalRange()
         {
             float minNormalWeightRange;
@@ -221,6 +273,12 @@ namespace COMP123_S2019_Assignment4_BMICalculator
             NormalRangeTextBox.Text = "A normal adult weight for" + Environment.NewLine + "this height is"
                 + Environment.NewLine + "between " + Math.Round(minNormalWeightRange, 1) + "-" + Math.Round(maxNormalWeightRange, 1) + " " + unit;
         }
+
+        /// <summary>
+        /// if the user click Calculate BMI button
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void CalculateButton_Click(object sender, EventArgs e)
         {
             if (WeightTextBox.Text != "0" && HeightTextBox.Text != "0")
@@ -236,6 +294,11 @@ namespace COMP123_S2019_Assignment4_BMICalculator
             }            
         }
 
+        /// <summary>
+        /// if the uesr click Reset button
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ResetButton_Click(object sender, EventArgs e)
         {
             WeightTextBox.Text = "0";
@@ -244,6 +307,11 @@ namespace COMP123_S2019_Assignment4_BMICalculator
             ResultPanel.Visible = false;
         }
 
+        /// <summary>
+        /// if the user close the form, the application will exit
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void BMICalculator_FormClosing(object sender, FormClosingEventArgs e)
         {
             Application.Exit();

@@ -10,6 +10,7 @@ using System.Windows.Forms;
 // Program description: This program will accept weight, height from user and calculate user's BMI.
 // Revision history
 // 21/07/2019 Create UI
+// 22/07/2019 Add funtionalities
 
 namespace COMP123_S2019_Assignment4_BMICalculator
 {

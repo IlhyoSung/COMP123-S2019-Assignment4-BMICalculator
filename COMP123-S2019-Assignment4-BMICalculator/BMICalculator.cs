@@ -36,7 +36,6 @@ namespace COMP123_S2019_Assignment4_BMICalculator
             WeightUnitLabel.Text = "lbs";
             HeightTextBox.Text = "0";
             WeightTextBox.Text = "0";
-
         }
 
         private void MetricButton_CheckedChanged(object sender, EventArgs e)
@@ -185,16 +184,22 @@ namespace COMP123_S2019_Assignment4_BMICalculator
             if (BMI < 18.5)
             {
                 ResultTextBox.Text = "Underweight" + Environment.NewLine + "(less than 18.5)";
+                BMIProgressBar.ForeColor = Color.Yellow;
+                
             } else if (BMI >= 18.5 && BMI < 25)
             {
                 ResultTextBox.Text = "Normal" + Environment.NewLine + "(18.5 to 24.9)";
+                BMIProgressBar.ForeColor = Color.Green;                
             } else if (BMI >= 25 && BMI < 30)
             {
                 ResultTextBox.Text = "Overweight" + Environment.NewLine + "(25 to 29.9)";
+                BMIProgressBar.ForeColor = Color.Orange;                
             } else
             {
                 ResultTextBox.Text = "Obese" + Environment.NewLine + "(30 or greater)";
+                BMIProgressBar.ForeColor = Color.Red;                
             }
+            BMIProgressBar.Value = (int)BMI;
         }
         private void Show_NormalRange()
         {
@@ -237,6 +242,11 @@ namespace COMP123_S2019_Assignment4_BMICalculator
             HeightTextBox.Text = "0";
             ImperialButton.Checked = true;
             ResultPanel.Visible = false;
+        }
+
+        private void BMICalculator_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            Application.Exit();
         }
     }
 }

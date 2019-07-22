@@ -16,15 +16,19 @@ namespace COMP123_S2019_Assignment4_BMICalculator
 {
     static class Program
     {
+        public static BMICalculator bMICalculator;
+        public static WelcomeForm welcomeForm;
         /// <summary>
         /// The main entry point for the application.
         /// </summary>
         [STAThread]
         static void Main()
         {
-            Application.EnableVisualStyles();
+            //Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new BMICalculator());
+            welcomeForm = new WelcomeForm();
+            bMICalculator = new BMICalculator();
+            Application.Run(welcomeForm);
         }
     }
 }

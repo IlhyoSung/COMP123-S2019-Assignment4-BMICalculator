@@ -39,7 +39,6 @@
             this.SixButton = new System.Windows.Forms.Button();
             this.FiveButton = new System.Windows.Forms.Button();
             this.FourButton = new System.Windows.Forms.Button();
-            this.BackButton = new System.Windows.Forms.Button();
             this.NineButton = new System.Windows.Forms.Button();
             this.EightButton = new System.Windows.Forms.Button();
             this.SevenButton = new System.Windows.Forms.Button();
@@ -57,9 +56,10 @@
             this.MyBMILabel = new System.Windows.Forms.Label();
             this.BMITextBox = new System.Windows.Forms.TextBox();
             this.ResultPanel = new System.Windows.Forms.Panel();
-            this.progressBar1 = new System.Windows.Forms.ProgressBar();
+            this.BMIProgressBar = new System.Windows.Forms.ProgressBar();
             this.ResultTextBox = new System.Windows.Forms.TextBox();
             this.NormalRangeTextBox = new System.Windows.Forms.TextBox();
+            this.BackButton = new System.Windows.Forms.Button();
             this.CalculatorPanel.SuspendLayout();
             this.ResultPanel.SuspendLayout();
             this.SuspendLayout();
@@ -279,25 +279,6 @@
             this.FourButton.UseVisualStyleBackColor = false;
             this.FourButton.Click += new System.EventHandler(this.CalculatorButton_Click);
             // 
-            // BackButton
-            // 
-            this.BackButton.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.BackButton.BackColor = System.Drawing.Color.SeaGreen;
-            this.BackButton.BackgroundImage = global::COMP123_S2019_Assignment4_BMICalculator.Properties.Resources.backbutton;
-            this.BackButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.BackButton.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.BackButton.Font = new System.Drawing.Font("Arial Narrow", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.BackButton.ForeColor = System.Drawing.Color.White;
-            this.BackButton.Location = new System.Drawing.Point(213, 48);
-            this.BackButton.Name = "BackButton";
-            this.BackButton.Size = new System.Drawing.Size(64, 39);
-            this.BackButton.TabIndex = 3;
-            this.BackButton.Tag = "back";
-            this.BackButton.UseVisualStyleBackColor = false;
-            this.BackButton.Click += new System.EventHandler(this.CalculatorButton_Click);
-            // 
             // NineButton
             // 
             this.NineButton.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -505,7 +486,7 @@
             // ResultPanel
             // 
             this.ResultPanel.BackColor = System.Drawing.SystemColors.Control;
-            this.ResultPanel.Controls.Add(this.progressBar1);
+            this.ResultPanel.Controls.Add(this.BMIProgressBar);
             this.ResultPanel.Controls.Add(this.ResultTextBox);
             this.ResultPanel.Controls.Add(this.NormalRangeTextBox);
             this.ResultPanel.Controls.Add(this.MyBMILabel);
@@ -516,14 +497,17 @@
             this.ResultPanel.TabIndex = 12;
             this.ResultPanel.Visible = false;
             // 
-            // progressBar1
+            // BMIProgressBar
             // 
-            this.progressBar1.BackColor = System.Drawing.Color.White;
-            this.progressBar1.Location = new System.Drawing.Point(3, 53);
-            this.progressBar1.Name = "progressBar1";
-            this.progressBar1.Size = new System.Drawing.Size(281, 23);
-            this.progressBar1.Style = System.Windows.Forms.ProgressBarStyle.Continuous;
-            this.progressBar1.TabIndex = 14;
+            this.BMIProgressBar.BackColor = System.Drawing.Color.White;
+            this.BMIProgressBar.Location = new System.Drawing.Point(3, 51);
+            this.BMIProgressBar.Maximum = 50;
+            this.BMIProgressBar.Name = "BMIProgressBar";
+            this.BMIProgressBar.Size = new System.Drawing.Size(280, 27);
+            this.BMIProgressBar.Step = 100;
+            this.BMIProgressBar.Style = System.Windows.Forms.ProgressBarStyle.Continuous;
+            this.BMIProgressBar.TabIndex = 14;
+            this.BMIProgressBar.Value = 25;
             // 
             // ResultTextBox
             // 
@@ -544,6 +528,25 @@
             this.NormalRangeTextBox.Size = new System.Drawing.Size(280, 78);
             this.NormalRangeTextBox.TabIndex = 12;
             this.NormalRangeTextBox.Text = "A normal adult weight for this height is \r\nbetween 132.3-178.8 lbs";
+            // 
+            // BackButton
+            // 
+            this.BackButton.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.BackButton.BackColor = System.Drawing.Color.SeaGreen;
+            this.BackButton.BackgroundImage = global::COMP123_S2019_Assignment4_BMICalculator.Properties.Resources.backbutton;
+            this.BackButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.BackButton.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.BackButton.Font = new System.Drawing.Font("Arial Narrow", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BackButton.ForeColor = System.Drawing.Color.White;
+            this.BackButton.Location = new System.Drawing.Point(213, 48);
+            this.BackButton.Name = "BackButton";
+            this.BackButton.Size = new System.Drawing.Size(64, 39);
+            this.BackButton.TabIndex = 3;
+            this.BackButton.Tag = "back";
+            this.BackButton.UseVisualStyleBackColor = false;
+            this.BackButton.Click += new System.EventHandler(this.CalculatorButton_Click);
             // 
             // BMICalculator
             // 
@@ -569,6 +572,7 @@
             this.Name = "BMICalculator";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "BMI Calculator";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.BMICalculator_FormClosing);
             this.CalculatorPanel.ResumeLayout(false);
             this.CalculatorPanel.PerformLayout();
             this.ResultPanel.ResumeLayout(false);
@@ -611,7 +615,7 @@
         private System.Windows.Forms.Button EightButton;
         private System.Windows.Forms.Button SevenButton;
         private System.Windows.Forms.Label NumberResultLabel;
-        private System.Windows.Forms.ProgressBar progressBar1;
+        private System.Windows.Forms.ProgressBar BMIProgressBar;
     }
 }
 

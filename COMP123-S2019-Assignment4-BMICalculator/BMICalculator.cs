@@ -141,6 +141,7 @@ namespace COMP123_S2019_Assignment4_BMICalculator
                 decimalExists = true;
             }
         }
+
         /// <summary>
         /// If the user click done button
         /// </summary>
@@ -167,7 +168,6 @@ namespace COMP123_S2019_Assignment4_BMICalculator
         {
             if (outputString.Length > 0)
             {
-
                 var lastChar = outputString.Substring(outputString.Length - 1);
                 if (lastChar == ".")
                 {

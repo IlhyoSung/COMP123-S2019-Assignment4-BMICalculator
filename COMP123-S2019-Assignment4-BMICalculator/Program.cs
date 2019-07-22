@@ -27,9 +27,14 @@ namespace COMP123_S2019_Assignment4_BMICalculator
         {
             // This is for removing style of progress bar
             //Application.EnableVisualStyles();
+
             Application.SetCompatibleTextRenderingDefault(false);
+            
+            // This is instantiating each form
             welcomeForm = new WelcomeForm();
             bMICalculator = new BMICalculator();
+
+            // This is for displaying Welcome Form first
             Application.Run(welcomeForm);
         }
     }
